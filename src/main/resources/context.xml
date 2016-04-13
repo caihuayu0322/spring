@@ -17,6 +17,7 @@
         p:url="jdbc:mysql://localhost:3306/mydb"
         p:username="root"
         p:password="masterkaoli"/> -->
+	<context:spring-configured />
 
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	<mvc:annotation-driven/>
@@ -29,7 +30,7 @@
 	</context:component-scan>
 	
 	<aop:config>
-		<aop:pointcut expression="execution(* com.caicai.www.service.HelloWorldService.test())" id="myPointCut"/>
+		<aop:pointcut expression="execution(* com.caicai.www.service.HelloWorldService.*(..))" id="myPointCut"/>
 		<!-- <aop:advisor advice-ref="s" pointcut-ref="myPointCut"/> -->
 		
 		<aop:aspect id="myAspect" ref="ExceptionInterceptor">
@@ -40,8 +41,39 @@
 		
 	</aop:config>
 	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/configure.properties</value>
+			</list>
+		</property>
+	</bean>
+	
 	<bean class="com.caicai.www.service.HelloWorldService"/>
 	
 	<bean id="ExceptionInterceptor" class="com.caicai.www.intercepter.ExceptionInterceptor"/>
+	
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="pooledConnectionFactory"/>
+	</bean>
+	
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="${brokerUrl}"></property>
+	</bean>
+	
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="connectionFactory" ref="targetConnectionFactory"/>
+		<property name="maxConnections" value="10"/>
+		<property name="reconnectOnException" value="true"/>
+	</bean>
+	<!-- Spring提供的jms工具类，它可以进行消息发送，接受 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<!-- 这个connectionFactory对应的是我们定义的Spring提供的那个connectionFactory对象 -->
+		<property name="connectionFactory" ref="connectionFactory"/>
+	</bean>
+	
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="topic"/>
+	</bean>
 	
 </beans>

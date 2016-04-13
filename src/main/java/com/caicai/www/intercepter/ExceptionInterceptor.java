@@ -12,11 +12,11 @@ public class ExceptionInterceptor{
 	
 	private Log log = LogFactory.getLog(ExceptionInterceptor.class.getName());
 	
-	public void before(){
+	public void before() throws Exception{
 		System.out.println(23123);
 	}
 
-	public void afterThrowing(JoinPoint jointPoint , RuntimeException e){
+	public void afterThrowing(JoinPoint jointPoint , Exception e){
 		log.debug("", e);
 //		log.error(e.getStackTrace(), e);
 		System.out.println(2323);

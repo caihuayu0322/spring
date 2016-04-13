@@ -21,6 +21,13 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     
+    
+	<!-- <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener> -->
+    
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
         <url-pattern>/spring/*</url-pattern>

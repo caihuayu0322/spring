@@ -20,7 +20,7 @@
  
  
     <root level="debug">  
-    	<appender-ref ref="candao"/>
+ <!--    	<appender-ref ref="candao"/> -->
     	<appender-ref ref="STDOUT"/>
   	</root>  
  
@@ -28,7 +28,7 @@
 	
 	<logger name="org.springframework" level="debug" >
 	</logger>
-	<logger name="org.apache" level="info" >
+	<logger name="org.apache" level="debug" >
 	</logger>
 	<logger name="com.github.miemiedev" level="info" >
 	</logger>
