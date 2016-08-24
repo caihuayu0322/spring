@@ -9,8 +9,9 @@ import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.springframework.web.context.support.WebApplicationObjectSupport;
 
-public class JMSConsumer {
+public class JMSConsumer extends WebApplicationObjectSupport{
 
 	private static final String USERNAME = ActiveMQConnection.DEFAULT_USER;
 	
@@ -20,6 +21,8 @@ public class JMSConsumer {
 	
 	public static void main(String[] args) {
 		ConnectionFactory connectionFactory;
+		
+		
 		
 		Connection connection;
 		

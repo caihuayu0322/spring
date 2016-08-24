@@ -14,7 +14,10 @@ import javax.jms.TextMessage;
 import javax.jms.Topic;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.ActiveMQMessageProducer;
+import org.apache.activemq.ActiveMQSession;
 import org.apache.activemq.RedeliveryPolicy;
+import org.apache.activemq.command.ActiveMQMessage;
 
 public class JMSProducer {
 
@@ -22,7 +25,11 @@ public class JMSProducer {
 	
 	private static final String PASSWORD = ActiveMQConnectionFactory.DEFAULT_PASSWORD;
 	
-	private static final String BROKEURL = "failover://(tcp://127.0.0.1:61616?wireFormat.maxInactivityDuration=50000)?initialReconnectDelay=100";
+//	private static final String BROKEURL = "failover://(tcp://120.24.190.55:61616)?initialReconnectDelay=100&maxReconnectDelay=2000";
+	
+	private static final String BROKEURL = "failover://(tcp://119.254.103.229:61616)?initialReconnectDelay=100&maxReconnectDelay=2000";
+	
+//	private static final String BROKEURL = "failover://(tcp://127.0.0.1:61616)?initialReconnectDelay=100&maxReconnectDelay=2000";
 	
 	private static final int SENDNUM = 1;
 	
@@ -50,10 +57,17 @@ public class JMSProducer {
 //			connectionFactory.setRedeliveryPolicy();
 			
 			session = connection.createSession(true, Session.AUTO_ACKNOWLEDGE);
+//			((ActiveMQConnectionFactory) connection).get;
+			
+			
 			
 			destination = session.createQueue("HelloWorld");
 			
+			
+			
 			messageProducer = session.createProducer(destination);
+			
+			
 			
 //			topic = session.createTopic("HelloWorldTopic");
 			
@@ -61,7 +75,11 @@ public class JMSProducer {
 			
 			sendMessage(session, messageProducer);		
 			
+			System.out.println(1);
+			
 			session.commit();
+			
+			System.out.println(2333);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,8 +112,9 @@ public class JMSProducer {
 			input.close();
 			
 			TextMessage message = session.createTextMessage(stringBuffer.toString());
+			System.out.println(message.getJMSRedelivered());
 			System.out.println("发送消息：AvtiveMq 发送消息" + i);
-			messageProducer.send(message, Message.DEFAULT_DELIVERY_MODE, Message.DEFAULT_PRIORITY, 1000000);;
+			messageProducer.send(message, Message.DEFAULT_DELIVERY_MODE, Message.DEFAULT_PRIORITY, 0);;
 			System.out.println("发送消息：AvtiveMq 消息发送成功！");
 		}
 	}

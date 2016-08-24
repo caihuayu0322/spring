@@ -76,4 +76,55 @@
 		<constructor-arg value="topic"/>
 	</bean>
 	
+	 <!-- <context:component-scan base-package="com.caicai.www"></context:component-scan>  -->
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
+		<property name="beans">
+			<map>
+				<entry key="bean:name=helloworld1" value-ref="helloworld"/>
+				<entry key="bean:name=test1" value-ref="test"></entry>
+			</map>
+		</property>
+		<property name="autodetect" value="true"/>
+		<property name="registrationBehaviorName" value="REGISTRATION_REPLACE_EXISTING"/>
+		<property name="assembler" ref="metadata"/>
+		<property name="server" ref="mbServer" />
+	</bean>
+	<bean id="metadata" class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+		<property name="attributeSource" ref="jmxAttributeSourse"></property>
+	</bean>
+	
+	
+	<bean id="jmxAttributeSourse" class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource"></bean>
+	
+	<bean id="helloworld" class="com.caicai.www.jmx.HelloWorld">
+		<property name="name" value="caicai"/>
+	</bean>
+	
+	<bean id="test" class="com.caicai.www.jmx.AnnotationTestBean"></bean>
+	
+	<bean name="spring:mbean=true" class="com.caicai.www.intercepter.ExceptionInterceptor"></bean>
+	
+	<bean id="mbServer" class="org.springframework.jmx.support.MBeanServerFactoryBean" >
+		<!-- <property name="locateExistingServerIfPossible" value="true"></property> -->
+		<!-- <property name="agentId" value="233"></property> -->
+		<!-- <property name=""></property> -->
+		
+	</bean>
+	
+	<bean id="serverConnection" class="org.springframework.jmx.support.ConnectorServerFactoryBean">
+		<property name="serviceUrl" value="service:jmx:rmi://localhost/jndi/rmi://localhost:1099/myconnector" />
+		<property name="objectName" value="connector:name=rmi"/>
+		<property name="daemon" value="true"/>
+		<property name="threaded" value="true"></property>
+		<!-- <property name="environmentMap">
+			<map>
+				<entry key="name" value="caicaiConnector" />
+			</map>
+		</property> -->
+		<property name="server" ref="mbServer"/>
+	</bean>
+	
+	<bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+		<property name="port" value="1099"/>
+	</bean>
 </beans>
