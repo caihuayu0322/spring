@@ -9,9 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * @description 使用transient关键字不序列化某个变量
- *        注意读取的时候，读取数据的顺序一定要和存放数据的顺序保持一致
- *        
+ *
  * @author Alexia
  * @date  2013-10-15
  */
@@ -30,7 +28,7 @@ public class TransientTest {
         try {
             ObjectOutputStream os = new ObjectOutputStream(
                     new FileOutputStream("C:\\Users\\Public\\Desktop\\user.txt"));
-            os.writeObject(user); // 将User对象写进文件
+            os.writeObject(user);
             os.flush();
             os.close();
         } catch (FileNotFoundException e) {
@@ -41,7 +39,7 @@ public class TransientTest {
         try {
             ObjectInputStream is = new ObjectInputStream(new FileInputStream(
                     "C:\\Users\\Public\\Desktop\\user.txt"));
-            user = (User) is.readObject(); // 从流中读取User的数据
+            user = (User) is.readObject();
             is.close();
             
             System.out.println("\nread after Serializable: ");
