@@ -10,7 +10,8 @@
 		<module>plugin</module>
         <module>config</module>
         <module>web</module>
-    </modules>
+		<module>test</module>
+	</modules>
 
 	<!--<prerequisites>
 		<maven>${mavenVersion}</maven>
@@ -37,11 +38,11 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>3.0</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>org.apache.maven</groupId>-->
+			<!--<artifactId>maven-plugin-api</artifactId>-->
+			<!--<version>3.0</version>-->
+		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
@@ -139,21 +140,21 @@
 			<artifactId>cglib-nodep</artifactId>
 			<version>2.2</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-core</artifactId>
 			<version>5.7.0</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
 			<version>5.11.1</version>
-		</dependency>
+		</dependency>-->
 		<!-- <dependency> <groupId>org.apache.activemq</groupId> <artifactId>activemq-all</artifactId> 
 			<version>5.11.1</version> </dependency> -->
 		<dependency>
@@ -179,11 +180,11 @@
 			<version>1.1.36</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
 			<version>2.3.2</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>
@@ -202,7 +203,7 @@
 	</build>
 
 	<reporting>
-		<plugins>
+		<!--<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
@@ -213,7 +214,7 @@
 				<artifactId>plugin</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</plugin>
-		</plugins>
+		</plugins>-->
 	</reporting>
 
 	<profiles>
@@ -242,11 +243,11 @@
 	<!--这个repositories是不是指定的是local repository?-->
 	<!--result:it is another remote repository-->
 	<!--这个到底有啥子用-->
-	<repositories>
+	<!--<repositories>
 		<repository>
 			<id>java.net</id>
 			<url>https://maven.java.net/content/repositories/public/</url>
 		</repository>
-	</repositories>
+	</repositories>-->
 
 </project>
