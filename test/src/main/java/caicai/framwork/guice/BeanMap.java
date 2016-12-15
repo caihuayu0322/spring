@@ -7,9 +7,15 @@ import java.util.HashMap;
 /**
  * Created by Administrator on 2016-12-9.
  */
-public class BeanMap<K,V> extends HashMap<K,V>{
+public class BeanMap<K, V> extends HashMap<K, V> {
+    private String ID;
 
-    @Inject
-    public BeanMap(){
+    public BeanMap(String ID) {
+        this.ID = ID;
+    }
+
+    @Override
+    public String toString() {
+        return ID;
     }
 }
