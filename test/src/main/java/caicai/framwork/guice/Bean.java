@@ -1,7 +1,8 @@
-package caicai.google.guice;
+package caicai.framwork.guice;
 
 import com.google.inject.Inject;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +15,8 @@ public class Bean implements IBean{
     private Map<String,Object> value;
 
     @Inject
-    public Bean(List name,Map value){
+    public Bean(List name,HashMap<String,Object> value){
         this.name = name;
         this.value = value;
-        System.out.println(1);
     }
 }

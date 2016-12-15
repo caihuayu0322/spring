@@ -1,9 +1,7 @@
-package caicai.google.guice;
+package caicai.framwork.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016-12-9.

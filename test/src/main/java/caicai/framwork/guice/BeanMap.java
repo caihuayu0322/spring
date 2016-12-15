@@ -1,4 +1,4 @@
-package caicai.google.guice;
+package caicai.framwork.guice;
 
 import com.google.inject.Inject;
 
