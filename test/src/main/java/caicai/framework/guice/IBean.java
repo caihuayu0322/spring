@@ -1,4 +1,4 @@
-package caicai.framwork.guice;
+package caicai.framework.guice;
 
 /**
  * Created by Administrator on 2016-12-9.
