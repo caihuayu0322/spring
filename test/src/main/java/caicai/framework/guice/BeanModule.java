@@ -5,6 +5,7 @@ import com.google.inject.Provides;
 import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,10 +21,9 @@ public class BeanModule extends AbstractModule {
      * a 用户指定 问题是一个对象可以有很多实现类，怎么区分需要使用不同的实现类？guice和spring实现思路类似
      * 用户为一个被注入的对象指定name等唯一标示符;怎么创建？单例还是prototype?guice默认是prototype
      * b 自动判定，其实这点很简单，注入的必定为实现类，合并让用户手动绑定？减少使用者代码、操作才能通用
-     *
+     * <p>
      * 3 实例化并注入
      * a 怎么注入？构造方法还是？
-     *
      */
     @Override
     protected void configure() {
@@ -35,7 +35,7 @@ public class BeanModule extends AbstractModule {
     }
 
     @Provides
-    private BeanMap getBeanMap(){
+    private BeanMap getBeanMap() {
         return new BeanMap("testProvides");
     }
 }
